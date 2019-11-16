@@ -31,7 +31,7 @@ class Stack{
             return top == -1;
         }
         bool IsFull(){
-            return top = maxsize-1;
+            return top == maxsize-1;
         }
 };
 
@@ -51,7 +51,7 @@ template<typename type> type Stack<type>::Pop()
     if(IsEmpty())
     {
         cout<<"The Stack is empty!"<<endl;
-        exit(1);
+        exit(-1);
     }
     return elements[top--];
 }
@@ -61,7 +61,7 @@ template<typename type> type Stack<type>::GetTop()
     if(IsEmpty())
     {
         cout<<"The stack is empty!"<<endl;
-        return;
+        exit(-1);
     }
     return elements[top];
 
@@ -69,11 +69,11 @@ template<typename type> type Stack<type>::GetTop()
 template<typename type> void Stack<type>::Print()
 {
     int move = top;
-    cout<<"栈顶=>";
+    cout<<"Top=>";
     while (move!=-1)
     {
-        cout<<elemnts[move--]<<"=>";
+        cout<<elements[move--]<<"=>";
     }
-    cout<<"栈底"<<endl;
+    cout<<"Bottom"<<endl;
     
 }
