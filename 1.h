@@ -1,196 +1,217 @@
 #include <iostream>
-using namespace std;
-/*线性表的链式表示和实现
-*	@2016.3.3 zgf 
-*/
+#include <vector>
+
+
+
 /*
-typedef struct LNode {
-	int data;
-	struct LNode *next;
-}LNode, *LinkList;
+* 交换两元素
 */
-template <typename Type> class LinkList;
-/*  定义链表的结点结构 
-    包括数据和一个指针 
-*/
-template <typename Type> class LNode {
-	public:
-		//friend typename LinkList<Type>;
-		LNode():m_pnext(NULL) {
-		}
-		LNode(const Type item, LNode<Type> *next=NULL):m_data(item),m_pnext(next) {
-		}
-		~LNode(){
-			m_pnext=NULL;
-		}
-	public:
-		Type GetData();
-	//	friend ostream& operator<< <Type>(ostream&, LNode<Type>&);
-	public:
-		Type m_data;
-		LNode *m_pnext;
-};
-template<typename Type> Type LNode<Type>::GetData()
-{
-	return this->m_data;
+template <typename T>
+void Swap(T &a, T &b) {
+	T tmp = a;
+	a = b;
+	b = tmp;
 }
+
+/* 
+* 冒泡排序
+* 时间复杂度：O(n^2) 
+* 最差复杂度：O(n^2)
+* 最好复杂度：O(n)
+* 空间复杂度：O(1)
+* 稳定性：稳定
+*/
+template <typename T>
+T bubble_sort(T &arr, size_t arr_size) {
+	for (size_t i = 0; i < arr_size - 1; ++i) {
+		bool have_sorted = true; // 标记序列是否有序，有序则提前跳出循环
+
+		for (size_t j = 0; j < arr_size - i -1; ++j) {
+			if (arr[j + 1] < arr[j]) { // 若<改为<=，则算法变为不稳定的
+				Swap(arr[j], arr[j + 1]);
+
+				have_sorted = false;
+			}
+		}
+		if (have_sorted)
+			break;
+	}
+
+	return arr;
+}
+
 /*
-template<typename Type> ostream& operator<< <Type> (ostream& os, LNode<Type>& out)
-{
-	os<<out.m_data;
-	return os;
-}*/
-//定义链表 
-template <typename Type> class LinkList {
-	public :
-		LinkList():head(new LNode<Type>()) {}
-		~LinkList(){
-			MakeEmpty();
-			delete head;
+* 选择排序
+* 时间复杂度：O(n^2)
+* 最差复杂度：O(n^2)
+* 最好复杂度：O(n^2)
+* 空间复杂度：O(1)
+* 稳定性：不稳定
+*/
+template <typename T>
+T select_sort(T &arr, size_t size) {
+	for (size_t i = 0; i < size - 1; ++i) {
+		size_t tmp = i;
+		for (size_t j = i + 1; j < size; ++j) {
+			if (arr[j] < arr[tmp]) {
+				tmp = j;
+			}
 		}
-	public:
-		void MakeEmpty();
-		int Length();                           //获取链表的长度 
-		LNode<Type> *Find(Type value,int n); 	//查找值 
-		LNode<Type> *Find(int n);            
-		bool Insert(Type item,int n=0);         //在n位置插入数据 
-		Type Remove(int n=0);                   //移除n位置的数据 
-		bool RemoveAll(Type item);              //删除item的数据 
-		Type Get(int n);                        //获取n位置的数据 
-		void Print();                           //打印信息 
-	private:
-		LNode<Type> *head;
-
-};
-template<typename Type> void LinkList<Type>::MakeEmpty()
-{
-	LNode<Type> *pdel;
-	while (head->m_pnext != NULL) {//头结点的下一个非空  
- 		pdel = head->m_pnext;
- 		head->m_pnext=pdel->m_pnext;//改变指针 
- 		delete pdel;
+		//本轮第一个数为最小数，则不用交换
+		if (tmp != i) Swap(arr[tmp], arr[i]);
 	}
-}
-template<typename Type> int LinkList<Type>::Length()
-{
-	LNode<Type> *pmove = head->m_pnext;
-	int count=0;
-	while (pmove!=NULL) { //不是结尾向后移动 ，计数 
-		pmove=pmove->m_pnext;
-		count++;
-	}
-	return count;
+	return arr;
 }
 
-template<typename Type> LNode<Type> *LinkList<Type>::Find(Type value,int n)
-{
-	
-}
-template<typename Type> LNode<Type> *LinkList<Type>::Find(int n)
-{//查找第n个元素，返回指向它的指针
-	if (n<0) {
-		cout << "The n is out of boundary"<<endl;
-		return NULL; 
-	} 
-	LNode<Type> *pmove=head->m_pnext;
-	for (int i=0; i<n&&pmove; i++) {
-		pmove=pmove->next;
-	}
-	if (pmove==NULL) {
-		cout<<"no n is find"<<endl;
-		return NULL;
-	}
-	return pmove; 
-	
-}
-template<typename Type> bool LinkList<Type>::Insert(Type item, int n) 
-{
-	if (n<0) {
-		cout<<"Insert position is illegal"<<endl;
-		return 0;
-	}
-	LNode<Type> *pmove=head;
-	LNode<Type> *pnode=new LNode<Type>(item);//申请一个节点空间
-	if (pnode==NULL) {
-		cout<<"application memery is error"<<endl;
-		return 0;
-	}
-	//将指针移动到要插入的位置
-	for (int i=0;i<n && pmove; i++) {
-		pmove=pmove->m_pnext;
-	} 
-	//是否到达了尾节点还没有找到插入的位置，
-	//插入的位置越界 
-	if (pmove==NULL) {
-		cout<<"insert is error"<<endl;
-		return 0;
-	}
-	//开始执行插入操作
-	pnode->m_pnext=pmove->m_pnext;
-	pmove->m_pnext=pnode; 
-	return 1;
-}
-template<typename Type> bool LinkList<Type>::RemoveAll(Type item)
-{
-	LNode<Type> *pmove=head;
-	LNode<Type> *pdel=head->m_pnext;
-	while (pdel!=NULL) {
-		if(pdel->m_data==item){//找到与删除的元素相同的 
-			pmove->m_pnext=pdel->m_pnext;
-			delete pdel;
-			pdel=pmove->m_pnext;
-			continue;
-		}
-		pmove=pmove->m_pnext;
-		pdel=pdel->m_pnext;
-	}
-	return 1;
-}
-template<typename Type> Type LinkList<Type>::Remove(int n)
-{//查找链表中第n个元素
-	if (n<0) {
-		cout<<"can not find this element"<<endl;
-		exit(1);
-	} 
-	LNode<Type> *pmove=head,*pdel;
-	for (int i=0; i<n && pmove->m_pnext; i++) {
-		pmove=pmove->m_pnext;//一直向后遍历，查找第n个元素 
-	}
-	if (pmove->m_pnext == NULL) {
-		cout<<"cant't find this element"<<endl;
-		exit(1);
-	}
-	//开始删除这个元素
-	pdel=pmove->m_pnext;
-	pmove->m_pnext=pdel->m_pnext;
-	Type temp=pdel->m_data;
-	delete pdel;
-	return temp; 
-}
-template<typename Type> Type LinkList<Type>::Get(int n)
-{
-	if (n<0) {
-		cout<<"can not find this element"<<endl;
-		exit(1);
-	} 
-	LNode<Type> *pmove=head;
-	for (int i=0; i<n; i++) {
-		pmove=pmove->m_pnext;//一直向后遍历，查找第n个元素 
-		if (pmove->m_pnext == NULL) {
-		cout<<"cant't find this element"<<endl;
-		exit(1);
+/*
+* 插入排序
+* 时间复杂度：O(n^2)
+* 最差复杂度：O(n^2)
+* 最好复杂度：O(n)
+* 空间复杂度：O(1)
+* 稳定性：稳定
+*/
+template <typename T>
+T insert_sort(T &arr, int size) {
+	for (int i = 1; i < size; ++i) {
+		int tmp = i;
+		// 每次将当前数插入到合适的位置，因此需要将有序的序列往后挪，以腾出位置
+		for (int j = i - 1; j >= 0 && arr[tmp] < arr[j]; --j) {
+			Swap(arr[tmp], arr[j]);
+			tmp = j;
 		}
 	}
-	Type temp=pmove->m_pnext->m_data;
-	return temp; 
+	return arr;
 }
 
-template<typename Type> void LinkList<Type>::Print(){
-	LNode<Type> *pmove=head->m_pnext;
-	cout<<"head";
-	while(pmove){
-		cout<<"--->"<<pmove->m_data;
-		pmove=pmove->m_pnext;
+/*
+* 希尔排序，优化版插入排序，每轮以不同步长进行插排，最后一轮步长为1
+* 时间复杂度：跟步长有关，O(n^1.3)
+* 最差复杂度：O(n^2)
+* 最好复杂度：O(n)
+* 空间复杂度：O(1)
+* 稳定性：不稳定
+*/
+template <typename T>
+T shell_sort(T &arr, int size) {
+	// 初始化步长
+	int gap = 1;
+	while (gap <= size) {
+		gap = 3 * gap + 1;
 	}
-	cout<<"--->over"<<endl<<endl;
+
+	// 每轮递减步长进行插排
+	while (gap >= 1) {
+		for (int i = gap; i < size; ++i) {
+			int tmp = i;
+			for (int j = i - gap; j >= 0 && arr[tmp] < arr[j]; --j) {
+				Swap(arr[tmp], arr[j]);
+				tmp = j;
+			}
+		}
+		gap = (gap - 1) / 3;
+	}
+	return arr;
+}
+
+/*
+* 归并排序调用函数，合并两个有序的序列arr[left, mid]和arr[mid+1, right]
+*/
+template <typename T>
+void _merge_two_arr(T &arr, int left, int mid, int right, T &tmp) {
+	int i = left;
+	int j = mid + 1;
+	int idx = left;
+
+	// 循环将小的数放到tmp中
+	while (i <= mid && j <= right) {
+		if (arr[i] <= arr[j]) { // 此处的等号保证排序稳定性
+			tmp[idx++] = arr[i++];
+		}
+		else {
+			tmp[idx++] = arr[j++];
+		}
+	}
+
+	while (i <= mid) tmp[idx++] = arr[i++]; // 将剩余的左半序列放进tmp
+	while (j <= right) tmp[idx++] = arr[j++]; // 将剩余的右半序列放进tmp
+
+	// 把tmp里的有序序列复制到原序列中
+	for (i = left; i <= right; ++i) {
+		arr[i] = tmp[i];
+	}
+}
+
+/*
+* 归并排序调用函数，递归地切分序列并合并
+*/
+template <typename T>
+void _merge_sort_rec(T &arr, int left, int right, T &tmp) {
+	if (left == right) return;
+	int mid = (left + right) >> 1;
+	_merge_sort_rec(arr, left, mid, tmp); // 分成左半部分
+	_merge_sort_rec(arr, mid + 1, right, tmp); // 分成左半部分
+	_merge_two_arr(arr, left, mid, right, tmp); // 合并有序的两部分
+}
+
+/*
+* 归并排序
+* 时间复杂度：O(nlogn)
+* 最差复杂度：O(nlogn)
+* 最好复杂度：O(nlogn)
+* 空间复杂度：O(n)
+* 稳定性：稳定
+*/
+template <typename T>
+T merge_sort(T &arr, int size) {
+	T tmp(arr); // 创建一个临时变量
+	_merge_sort_rec(arr, 0, size - 1, tmp);
+	return arr;
+}
+
+/*
+* 快速排序调用函数，将比base小的数放base左边，比base大的放base右边
+*/
+template <typename T>
+int _quick_sort_division(T &arr, int left, int right) {
+	T::value_type base = arr[left];
+	while (left < right) {
+		// 先从右往左，碰到第一个比base小的就将其放在left位置
+		while (left < right && arr[right] >= base)
+			--right;
+		arr[left] = arr[right];
+
+		// 再从左往右，碰到第一个比base大的就将其放在right位置
+		while (left < right && arr[left] <= base)
+			++left;
+		arr[right] = arr[left];
+	}
+	arr[left] = base; // 循环出来之后left=right，且此位置为上一个left或right位置的元素，
+	return left; // 返回切分后的基准点
+}
+
+/*
+* 快速排序调用函数，递归地将序列以基准点base分成左右两部分，且左部元素都比base小，右部元素都比base大
+*/
+template <typename T>
+void _quick_sort_rec(T &arr, int left, int right) {
+	if (left < right) {
+		int base_idx = _quick_sort_division(arr, left, right);
+		_quick_sort_rec(arr, left, base_idx - 1);
+		_quick_sort_rec(arr, base_idx + 1, right);
+	}
+}
+
+/*
+* 快速排序
+* 时间复杂度：O(nlogn)
+* 最差复杂度：O(n^2)
+* 最好复杂度：O(nlogn)
+* 空间复杂度：O(n)
+* 稳定性：不稳定
+*/
+template <typename T>
+T quick_sort(T &arr, int size) {
+	_quick_sort_rec(arr, 0, size - 1);
+	return arr;
 }
