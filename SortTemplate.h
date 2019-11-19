@@ -1,7 +1,6 @@
 #include<iostream>
 #include<vector>
-
-//定义交换两元素
+using namespace std;
 template<typename type> void Swap(type &a, type &b){
     type temp;
     temp = a;
@@ -75,9 +74,16 @@ template <typename type> void HeapAdjust(type &arr,int n, int s){
             j++;
         }
         if(arr[j]<=arr[i]) break;
-        Swap(arr[j],arr[i]);
-        i=j;
+        else{
+            Swap(arr[j],arr[i]);
+            i=j;
+            }
     }
+/*    for(int i =0; i<6;i++){
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+*/
 }
 
 
@@ -89,7 +95,7 @@ template <typename type> void CreateHeap(type &arr, int n){
 
 template <typename type> void HeapSort(type &arr, int n ){
     CreateHeap(arr, n);
-    for(int i =n; i>1;i++){
+    for(int i =n; i>1;i--){
         Swap(arr[0], arr[i-1]);
         HeapAdjust(arr, i-1, 0);
     }

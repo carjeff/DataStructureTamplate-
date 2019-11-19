@@ -9,27 +9,21 @@ int main()
 {
 
 	// ²âÊÔvector
-	vector<int> arr1 = { 9, 7, 5, 3, 1 };
+	vector<int> arr1 = { 9, 7, 5, 3, 1, 10 };
 
 	cout << "vector:" << endl;
-	for (auto i : arr1)
-		cout << i << " ";
+	for (int i=0; i< arr1.size();i++)
+		cout << arr1[i] << " ";
+	cout << endl;
+	HeapSort(arr1,arr1.size());
+	//SelectSort(arr1,arr1.size());
+	//BubbleSort(arr1,arr1.size());
+	//QuickSort(arr1,arr1.size());
+	for (int i =0;i<arr1.size();i++)
+		cout << arr1[i] << " ";
 	cout << endl;
 
-	for (auto i : QuickSort(arr1, arr1.size()))
-		cout << i << " ";
-	cout << endl;
 
-	// ²âÊÔarray
-	array<double, 5> arr2 = {1.1, 2.2, 4.4, 3.3, 5.5};
+return 0;
 
-	cout << "array:" << endl;
-	for (auto i : arr2)
-		cout << i << " ";
-	cout << endl;
-
-	for (auto i : QuickSort(arr2, arr2.size()))
-		cout << i << " ";
-	cout << endl;
-    return 0;
 }
