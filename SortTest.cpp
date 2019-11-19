@@ -1,14 +1,12 @@
 #include<iostream>
 #include"SortTemplate.h"
 #include<vector>
-#include<array>
 using namespace std;
 
 
 int main()
 {
 
-	// ²âÊÔvector
 	vector<int> arr1 = { 9, 7, 5, 3, 1, 10 };
 
 	cout << "vector:" << endl;
