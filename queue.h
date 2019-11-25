@@ -52,7 +52,9 @@ template<typename type> type Queue<type>::Out(){
         type temp;
         temp = elements[head];
         head = (head+1)%maxsize;
+        return temp;
     }
+
     
 }
 

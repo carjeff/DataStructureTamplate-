@@ -12,6 +12,8 @@ int main(){
     a.In(120);
     a.Print();
     a.Out();
+    int c = a.Out();
+    cout<<c<<" ";
     a.Print();
 
     return 0;

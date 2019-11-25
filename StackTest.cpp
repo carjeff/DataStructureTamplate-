@@ -10,5 +10,15 @@ int main(){
     a.Pop();
     int b = a.GetTop();
     cout<<b;
+    Stack <int> c(100);
+    c.Push(6);
+    int d = c.GetTop();
+    cout<<d;
+    Stack<char> hh(10);
+    hh.Push('(');
+    hh.Push(' ');
+    hh.Push(')');
+    hh.Print();
+
     return 0 ;
 }

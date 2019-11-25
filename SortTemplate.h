@@ -100,3 +100,56 @@ template <typename type> void HeapSort(type &arr, int n ){
         HeapAdjust(arr, i-1, 0);
     }
 }
+
+
+//插入排序
+template<typename type> type InsertSort(type &arr, int n){
+    for(int i =1; i<n; i++){
+        int temp = i;
+        for(int j= i-1;j>= 0 &&arr[temp]<arr[j]; j--){
+            Swap(arr[temp],arr[j]);
+            temp = j;
+        }
+    }
+    return arr;
+}
+
+//归并排序
+template <typename type> void MergeTwoArr(type &arr, int left, int mid, int right, type &temp){
+    int i = left;
+    int j = mid + 1;
+    int index = left;
+    //循环将小数放到temp中
+    while(i<= mid&&j<=right){
+        if(arr[i]<=arr[j]){
+            temp[index++] = arr[i++];
+        }
+        else
+        {
+            temp[index++] = arr[j++];
+        }
+        
+    }
+
+    while(i<=mid) temp[index++] = arr[i++]; //将剩余左半序列放到temp中
+    while(j<=right) temp[index++] = arr[j++]; //将剩余右半序列放到temp中
+
+    for(i=left;i<=right;i++){
+        arr[i] = temp[i];
+    }
+}
+
+template <typename type> void MergeSortRec(type &arr, int left, int right, type &temp){
+    if(left != right){
+        int mid = (left+right)/2;
+        MergeSortRec(arr, left, mid, temp);
+        MergeSortRec(arr, mid+1, right, temp);
+        MergeTwoArr(arr, left, mid, right, temp);
+    } 
+}
+
+template <typename type> type MergeSort(type &arr, int n){
+    type temp(arr);
+    MergeSortRec(arr,0,n-1,temp);
+    return arr;
+}
