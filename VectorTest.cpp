@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-    Vector<int> a(10);
+    Vector<int> a(10);//创建一个大小为10的int型数组
     for (int i = 0; i < 10; i++)
     {
         a.Insert(i,i+1);

@@ -1,7 +1,7 @@
 #include<iostream>
 #include"SortTemplate.h"
 using namespace std;
-
+//顺序查找
 template<typename type> void OrderSearch(type &arr, int key, int n){
     int i;
     for(i=0; i<n;i++){
@@ -16,7 +16,7 @@ template<typename type> void OrderSearch(type &arr, int key, int n){
         cout<<"Can't find the key:"<<key<<endl;
     }
 }
-
+//二分查找
 template<typename type> int BinarySearch(type &arr, int key, int n){
 
 	int position;

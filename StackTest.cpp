@@ -9,11 +9,11 @@ int main(){
     a.Print();
     a.Pop();
     int b = a.GetTop();
-    cout<<b;
+    cout<<b<<endl;
     Stack <int> c(100);
     c.Push(6);
     int d = c.GetTop();
-    cout<<d;
+    cout<<d<<endl;
     Stack<char> hh(10);
     hh.Push('(');
     hh.Push(' ');

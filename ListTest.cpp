@@ -12,7 +12,7 @@ int main(){
     int b = a.Length();
     cout<<b<<endl;
     int c = a.Find(2);
-    cout<<c;
+    cout<<c<<endl;
     a.Delete(1);
     a.Print();
     return 0;

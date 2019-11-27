@@ -13,7 +13,7 @@ int main(){
     a.Print();
     a.Out();
     int c = a.Out();
-    cout<<c<<" ";
+    cout<<c<<" "<<endl;
     a.Print();
 
     return 0;
