@@ -1,8 +1,9 @@
-#include<iostream>
-#include"Queue.h"
+#include <iostream>
+#include "Queue.h"
 using namespace std;
 
-int main(){
+int main()
+{
     Queue<int> a(10);
     a.In(1);
     a.In(4);
@@ -13,7 +14,7 @@ int main(){
     a.Print();
     a.Out();
     int c = a.Out();
-    cout<<c<<" "<<endl;
+    cout << c << " " << endl;
     a.Print();
 
     return 0;

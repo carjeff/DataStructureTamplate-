@@ -1,8 +1,9 @@
-#include<iostream>
-#include"List.h"
+#include <iostream>
+#include "List.h"
 using namespace std;
 
-int main(){
+int main()
+{
     list<int> a;
     a.Insert(1);
     a.Print();
@@ -10,9 +11,9 @@ int main(){
     a.Insert(3);
     a.Print();
     int b = a.Length();
-    cout<<b<<endl;
+    cout << b << endl;
     int c = a.Find(2);
-    cout<<c<<endl;
+    cout << c << endl;
     a.Delete(1);
     a.Print();
     return 0;
