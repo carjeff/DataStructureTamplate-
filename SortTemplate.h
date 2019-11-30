@@ -10,7 +10,14 @@ void Swap(type &a, type &b)
     b = temp;
 }
 
-//冒泡排序
+/* 
+* 冒泡排序
+* 时间复杂度：O(n^2) 
+* 最差复杂度：O(n^2)
+* 最好复杂度：O(n)
+* 空间复杂度：O(1)
+* 稳定性：稳定
+*/
 template <typename type>
 void BubbleSort(type &arr, int n)
 {
@@ -25,8 +32,14 @@ void BubbleSort(type &arr, int n)
         }
     }
 }
-
-//选择排序
+/*
+* 选择排序
+* 时间复杂度：O(n^2)
+* 最差复杂度：O(n^2)
+* 最好复杂度：O(n^2)
+* 空间复杂度：O(1)
+* 稳定性：不稳定
+*/
 template <typename type>
 void SelectSort(type &arr, int n)
 {
@@ -47,7 +60,14 @@ void SelectSort(type &arr, int n)
     }
 }
 
-//快速排序
+/*
+* 快速排序
+* 时间复杂度：O(nlogn)
+* 最差复杂度：O(n^2)
+* 最好复杂度：O(nlogn)
+* 空间复杂度：O(n)
+* 稳定性：不稳定
+*/
 template <typename type>
 int Partiton(type &arr, int left, int right)
 {
@@ -131,7 +151,14 @@ void HeapSort(type &arr, int n)
     }
 }
 
-//插入排序
+/*
+* 插入排序
+* 时间复杂度：O(n^2)
+* 最差复杂度：O(n^2)
+* 最好复杂度：O(n)
+* 空间复杂度：O(1)
+* 稳定性：稳定
+*/
 template <typename type>
 void InsertSort(type &arr, int n)
 {
@@ -146,7 +173,14 @@ void InsertSort(type &arr, int n)
     }
 }
 
-//归并排序
+/*
+* 归并排序
+* 时间复杂度：O(nlogn)
+* 最差复杂度：O(nlogn)
+* 最好复杂度：O(nlogn)
+* 空间复杂度：O(n)
+* 稳定性：稳定
+*/
 template <typename type>
 void MergeTwoArr(type &arr, int left, int mid, int right, type &temp)
 {
